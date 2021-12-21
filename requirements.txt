@@ -1,0 +1,5 @@
+websocket-client
+threading
+time
+sys
+json
