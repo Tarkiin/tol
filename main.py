@@ -3,7 +3,6 @@ import sys
 import threading
 import time
 import websocket
-from concurrent.futures import ThreadPoolExecutor
 
 def updateTokens():
     with open('tokens.txt', 'r') as f:
@@ -45,12 +44,14 @@ def onliner(token):
 
 
 def main():
-    executor = ThreadPoolExecutor(max_workers=100)
+    oldTokens = []
     while True:
         tokens = updateTokens()
         for token in tokens:
-            print(f'Starting {token}')
-            threading.Thread(target=onliner, args=(token, )).start()
+            if not(token in oldTokens):
+                print(f'Starting {token}')
+                threading.Thread(target=onliner, args=(token, )).start()
+                oldTokens.append(token)
         time.sleep(540)
 
 
