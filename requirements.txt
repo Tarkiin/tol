@@ -1,5 +1,2 @@
-websocket-client
-threading
-time
-sys
-json
+psutil==5.9.0
+websocket_client==1.2.3
